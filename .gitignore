@@ -1,0 +1,9 @@
+# Root .gitignore
+node_modules/
+*.log
+.env
+__pycache__/
+*.pyc
+build/
+my-react-app/build/
+backend/debug_frames/
