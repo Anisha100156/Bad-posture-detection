@@ -77,7 +77,7 @@ def analyze_posture(video_path):
     avg_neck = sum(neck_angles) / len(neck_angles) if neck_angles else 0
     min_back = min(back_angles) if back_angles else 0
     summary = (
-        f"Summary: {'🟢 Good job!' if good_frames > 0.7 * len(feedback) else '⚠️ Posture needs improvement.'} "
+        f"Summary: {'🟢 Good job!' if good_frames > 0.7 * len(feedback) else '🔴 Posture needs improvement.'} "
         f"Only {good_frames}/{len(feedback)} frames were fully correct.\n"
         f"💡Avg neck tilt: {avg_neck:.1f}° — try to keep it <9°.\n"
         f"🧘Min back angle: {min_back:.1f}° — aim for ≥160° for upright posture."

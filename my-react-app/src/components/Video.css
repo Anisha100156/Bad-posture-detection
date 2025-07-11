@@ -5,9 +5,9 @@ body {
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background: #fff8e1;
+  min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  min-height: 100vh;
 }
 
 body::before,
@@ -62,8 +62,17 @@ body::after {
 .title {
   font-size: 2.2rem;
   font-weight: 600;
-  color: #ffb74d; /* Lighter orange */
+  color: #ffb74d;
   margin-bottom: 2rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
 .file-label {
@@ -78,19 +87,23 @@ body::after {
   z-index: -1;
 }
 
-.file-custom {
+.file-custom,
+.upload-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 180px;
   height: 50px;
-  background-color: #fbc02d;
-  color: white;
   font-size: 1rem;
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.file-custom {
+  background-color: #fbc02d;
+  color: white;
 }
 
 .file-custom:hover {
@@ -98,20 +111,10 @@ body::after {
 }
 
 .upload-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 180px;
-  height: 50px;
   background: linear-gradient(to right, #f9a825, #f57c00);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
   box-shadow: 0 5px 15px rgba(249, 168, 37, 0.5);
-  transition: all 0.3s ease;
 }
 
 .upload-btn:hover {
@@ -119,20 +122,22 @@ body::after {
   transform: translateY(-4px) scale(1.05);
 }
 
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+.selected-file {
+  margin-top: 10px;
+  font-weight: 500;
 }
 
-.loading {
+.error-text {
+  color: red;
   margin-top: 1rem;
-  font-style: italic;
-  color: #ff8800;
-  font-size: 1rem;
+}
+
+.summary, .advice {
+  margin-top: 0.75rem;
+  background-color: #f2f2f2;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
 .results {
@@ -174,28 +179,4 @@ body::after {
   font-size: 1rem;
   font-weight: 500;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-}
-
-.app-heading {
-  font-size: 3rem;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #e65100;
-  margin-bottom: 2.5rem;
-  background: linear-gradient(90deg, #ff8f00, #e65100);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-}
-
-.app-heading::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 5px;
-  background: #ff6f00;
-  margin: 12px auto 0 auto;
-  border-radius: 5px;
 }

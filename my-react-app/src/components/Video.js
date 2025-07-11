@@ -27,17 +27,15 @@ function VideoUpload() {
       const res = await axios.post("http://localhost:5000/analyze", formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      console.log("Response:", res.data); 
       setFeedback(res.data.bad_postures || []);
       setAdvice(res.data.advice || '');
       setSummary(res.data.summary || '');
-
     } catch (err) {
-      console.error("Upload failed:", err);
       setError("Failed to upload or process the video. Please try again.");
     }
     setLoading(false);
   };
+
   return (
     <motion.div
       className="upload-container"
@@ -46,7 +44,8 @@ function VideoUpload() {
       transition={{ duration: 0.8 }}
     >
       <h2 className="title">Upload Your Posture Video</h2>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+
+      <div className="button-group">
         <label className="file-label">
           <input
             type="file"
@@ -57,75 +56,46 @@ function VideoUpload() {
               setAdvice('');
               setFeedback([]);
               setSummary('');
-              console.log("Selected file:", e.target.files[0]);
             }}
             className="file-input"
           />
           <span className="file-custom">Choose File</span>
         </label>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-  <motion.button
-    className="upload-btn"
-    whileHover={{ scale: 1.05, y: -12 }}  
-    whileTap={{ scale: 0.95,  y: -12  }}
-    transition={{ type: "spring", stiffness: 300 }}
-    onClick={handleSubmit}
-    disabled={loading}
-  >
-    {loading ? 'Analyzing...' : 'Upload & Analyze'}
-  </motion.button>
-</div>
+
+        <motion.button
+          className="upload-btn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 300 }}
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? 'Analyzing...' : 'Upload & Analyze'}
+        </motion.button>
       </div>
-      {file && (
-        <p style={{ marginTop: '10px', fontWeight: '500' }}>
-          Selected: {file.name}
-        </p>
-      )}
-      {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
+
+      {file && <p className="selected-file">Selected: {file.name}</p>}
+      {error && <p className="error-text">{error}</p>}
+
       {summary && (
-        <motion.div
-          className="summary"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          style={{
-            marginTop: '1rem',
-            fontSize: '16px',
-            fontWeight: 600
-          }}
-        >
-         <strong>Summary:</strong> {summary}
+        <motion.div className="summary" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+          <strong>Summary:</strong> {summary}
         </motion.div>
       )}
+
       {advice && (
-        <motion.div
-          className="advice"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          style={{
-            marginTop: '0.75rem',
-            backgroundColor: '#f2f2f2',
-            padding: '10px 15px',
-            borderRadius: '8px',
-            fontWeight: '500'
-          }}
-        >
-         <strong>Advice:</strong> {advice}
+        <motion.div className="advice" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+          <strong>Advice:</strong> {advice}
         </motion.div>
       )}
+
       {feedback.length > 0 && (
         <div className="results">
-          <h3> Frame Feedback</h3>
+          <h3>Frame Feedback</h3>
           <ul>
             {feedback.map((item, index) => (
-              <motion.li
-                key={index}
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.03 }}
-              >
-              {item}
+              <motion.li key={index} initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: index * 0.03 }}>
+                {item}
               </motion.li>
             ))}
           </ul>
