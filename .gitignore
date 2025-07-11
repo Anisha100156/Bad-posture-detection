@@ -10,3 +10,10 @@ backend/debug_frames/
 venv
 __pycache__/
 *.pyc
+# Ignore Python virtual environments
+mp_env/
+venv/
+backend/mp_env/
+__pycache__/
+*.pyc
+
