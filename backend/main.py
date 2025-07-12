@@ -1,7 +1,8 @@
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 import os
-from app.routes.posture import posture_bp  
+from backend.app.routes.posture import posture_bp
+
 
 # Flask app setup
 app = Flask(__name__, static_folder='build', static_url_path='')
@@ -21,5 +22,7 @@ def serve_react(path=''):
 
 # ✅ Use dynamic port for Render
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))  # Render sets PORT env var
+    port = int(os.environ.get("PORT", 10000)) 
+    print(f"Running on port {port}")
+     # Render sets PORT env var
     app.run(host="0.0.0.0", port=port, debug=True)
