@@ -24,7 +24,8 @@ function VideoUpload() {
     const formData = new FormData();
     formData.append("video", file);
     try {
-      const res = await axios.post("http://localhost:5000/analyze", formData, {
+       const res = await axios.post("https://bad-posture-detection-20.onrender.com/analyze", formData, {
+
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setFeedback(res.data.bad_postures || []);
